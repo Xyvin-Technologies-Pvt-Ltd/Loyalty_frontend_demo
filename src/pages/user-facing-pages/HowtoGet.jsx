@@ -21,7 +21,7 @@ const HowtoGet = () => {
               How to Earn Points
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover all the ways you can earn reward points through Khedmah
+              Discover all the ways you can earn reward points through CBS
               services and unlock exclusive benefits
             </p>
           </div>
@@ -319,7 +319,7 @@ const HowtoGet = () => {
             <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3">
               <span className="text-white font-bold text-sm">K</span>
             </div>
-            Khedmah App
+            CBS App
           </h2>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -417,7 +417,7 @@ const HowtoGet = () => {
             <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3">
               <span className="text-white font-bold text-sm">D</span>
             </div>
-            Khedmah Delivery App
+            CBS Delivery App
           </h2>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

@@ -7,7 +7,7 @@ const Terms = () => {
         <div className="text-center mb-8">
           <DocumentTextIcon className="w-8 h-8 text-blue-600 mx-auto mb-4" />
           <h1 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
-            Khedmah Loyalty Program – Terms and Conditions
+            CBS Loyalty Program – Terms and Conditions
           </h1>
           <p className="text-xs text-gray-500">Last Updated: 10/09/2025</p>
         </div>
@@ -15,10 +15,10 @@ const Terms = () => {
         <div className="space-y-6 text-gray-700 leading-relaxed text-sm sm:text-base">
           <p className="text-xs sm:text-sm">
             These Terms and Conditions ("T&amp;Cs") govern the use and
-            participation in the Khedmah Customer Rewards and Loyalty Program
+            participation in the CBS Customer Rewards and Loyalty Program
             ("Program") managed by Dhofar International Development &amp;
-            Investment Co. S.A.O.G (Khedmah). By enrolling in or using the
-            Program through the Khedmah and/or Khedmah Delivery mobile
+            Investment Co. S.A.O.G (CBS). By enrolling in or using the
+            Program through the CBS and/or CBS Delivery mobile
             applications (collectively referred to as the “Apps”), you (“User”
             or “You”) agree to be bound by these Terms and Conditions.
           </p>
@@ -29,7 +29,7 @@ const Terms = () => {
             </h2>
             <p className="text-xs sm:text-sm">
               1.1. To be eligible for the Loyalty Program, participants must
-              hold a valid account on the Khedmah and/or Khedmah Delivery
+              hold a valid account on the CBS and/or CBS Delivery
               app(s).
             </p>
             <p className="text-xs sm:text-sm">
@@ -44,7 +44,7 @@ const Terms = () => {
             </h2>
             <p className="text-xs sm:text-sm">
               2.1. Users earn Reward Points ("Points") when completing eligible
-              transactions through Khedmah and/or Khedmah Delivery mobile apps.
+              transactions through CBS and/or CBS Delivery mobile apps.
             </p>
             <p className="text-xs sm:text-sm">
               2.2. Points Accumulation and Redemption
@@ -59,7 +59,7 @@ const Terms = () => {
                 available in the redemption catalogue on either app.
               </li>
               <li>
-                Customers having multiple profiles in Khedmah Application
+                Customers having multiple profiles in CBS Application
                 registered with a common mobile number will have loyalty points
                 accumulated against the mobile number rather than the user ID.
               </li>
@@ -95,7 +95,7 @@ const Terms = () => {
               3.2. Points will be awarded only for successful card payments.
             </p>
             <p className="text-xs sm:text-sm">
-              3.3. Khedmah reserves the right to define eligible transactions,
+              3.3. CBS reserves the right to define eligible transactions,
               exclude categories and revise the earning rate at any time without
               prior notice.
             </p>
@@ -119,7 +119,7 @@ const Terms = () => {
               4. Redeeming Points
             </h2>
             <p className="text-xs sm:text-sm">
-              4.1. Points may be redeemed through either Khedmah or Khedmah
+              4.1. Points may be redeemed through either CBS or CBS
               Delivery apps against:
             </p>
             <ul className="list-disc pl-6 text-xs sm:text-sm mb-2">
@@ -128,7 +128,7 @@ const Terms = () => {
               <li>Other offers listed in the rewards catalogue.</li>
             </ul>
             <p className="text-xs sm:text-sm">
-              4.2. Khedmah reserves the right to modify the catalogue, point
+              4.2. CBS reserves the right to modify the catalogue, point
               value, eligibility criteria and redemption processes without prior
               notice.
             </p>
@@ -157,7 +157,7 @@ const Terms = () => {
               <li>Fraudulent or suspicious activity is detected.</li>
               <li>
                 The User is found in violation of these Terms and Conditions.
-                Khedmah reserves the right to suspend or close loyalty for
+                CBS reserves the right to suspend or close loyalty for
                 suspected misuse, without obligation to compensate.
               </li>
             </ul>
@@ -210,7 +210,7 @@ const Terms = () => {
             <ul className="list-disc pl-6 text-xs sm:text-sm mb-2">
               <li>
                 By participating in the Program, Users consent to the
-                collection, use, and sharing of their personal data by Khedmah
+                collection, use, and sharing of their personal data by CBS
                 in accordance with Oman’s Electronic Transactions Law and
                 Personal Data Protection Law (Royal Decree No. 6/2022).
               </li>
@@ -219,7 +219,7 @@ const Terms = () => {
                 purpose of rewards processing or delivery of Program benefits.
               </li>
               <li>
-                Khedmah will take reasonable precautions to secure user data but
+                CBS will take reasonable precautions to secure user data but
                 are not liable for unauthorised access due to factors beyond
                 their control.
               </li>
@@ -232,7 +232,7 @@ const Terms = () => {
             </h2>
             <ul className="list-disc pl-6 text-xs sm:text-sm mb-2">
               <li>
-                Khedmah shall not be liable for any loss or damage arising from
+                CBS shall not be liable for any loss or damage arising from
                 delay, non-crediting or incorrect crediting of Points.
               </li>
               <li>
@@ -243,7 +243,7 @@ const Terms = () => {
             </ul>
             <p className="text-xs sm:text-sm">
               Users acknowledge and agree that the Program is offered "as-is"
-              and at the sole discretion of Khedmah.
+              and at the sole discretion of CBS.
             </p>
           </div>
 
@@ -277,13 +277,13 @@ const Terms = () => {
           </div>
 
           <p className="text-xs sm:text-sm">
-            By continuing to use the Khedmah or Khedmah Delivery apps and
+            By continuing to use the CBS or CBS Delivery apps and
             participating in the Loyalty Program, you confirm that you have read
             and agree to these Terms and Conditions.
           </p>
 
           <div className="pt-6 border-t border-gray-200 text-center text-xs sm:text-sm text-gray-500">
-            © {new Date().getFullYear()} Khedmah. All rights reserved.
+            © {new Date().getFullYear()} CBS. All rights reserved.
           </div>
         </div>
       </div>

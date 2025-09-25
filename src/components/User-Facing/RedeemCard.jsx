@@ -139,7 +139,7 @@ const RedeemCard = ({ onClose, image }) => {
                   <br />
                   <br />
                   Thanks for being part of{" "}
-                  <span className="font-bold text-green-600">Khedmah</span> –
+                  <span className="font-bold text-green-600">CBS</span> –
                   keep using our services regularly to unlock even more awesome
                   offers!
                 </p>
