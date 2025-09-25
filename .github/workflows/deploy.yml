@@ -58,9 +58,4 @@ jobs:
 
             echo "Deployment completed!"
 
-            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S rm -rf /var/www/html/loyalty-frontend
-            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S mv ~/deploy-temp/loyalty-frontend /var/www/html/
-            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S rm -rf ~/deploy-temp
-            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S rm -rf /var/cache/nginx/*
-            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S systemctl restart nginx
-
+           
