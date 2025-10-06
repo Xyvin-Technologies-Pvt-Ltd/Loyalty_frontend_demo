@@ -52,6 +52,14 @@ import ArabicCouponDetail from "../pages/user-facing-pages/ArabicCouponDetail";
 import HowtoGet from "../pages/user-facing-pages/HowtoGet";
 import HowtoGetArabic from "../pages/user-facing-pages/HowToGetArabic";
 import TermsArabic from "../pages/user-facing-pages/TermsArabic";
+import DemoDashboard from "../pages/demo/DemoDashboard";
+import DemoLayout from "../pages/demo/DemoLayout";
+import DemoHistory from "../pages/demo/DemoHistory";
+import DemoOffers from "../pages/demo/DemoOffers";
+import DemoCouponDetails from "../pages/demo/DemoOfferDetails";
+import DemoBrands from "../pages/demo/DemoBrands";
+import DemoCategories from "../pages/demo/DemoCategories";
+import DemoHowtoGet from "../pages/demo/DemoHowToGer";
 const RootLayout = () => (
   <AuthProvider>
     <Outlet />
@@ -70,13 +78,19 @@ const UserFacingLayout = () => (
     <Outlet />
   </UserLayout>
 );
-const ArabicFacingLayout= () => (
+const ArabicFacingLayout = () => (
   <ArabicLayout>
     <ScrollToTop />
     <Outlet />
   </ArabicLayout>
 );
 
+const DemoFacingLayout = () => (
+  <DemoLayout>
+    <ScrollToTop />
+    <Outlet />
+  </DemoLayout>
+);
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
@@ -128,7 +142,7 @@ const router = createBrowserRouter([
           { path: "/user/how-to", element: <HowtoGet /> },
         ],
       },
-            {
+      {
         path: "/user",
         element: <ArabicFacingLayout />,
         children: [
@@ -141,10 +155,23 @@ const router = createBrowserRouter([
           { path: "/user/support", element: <UserSupport /> },
           { path: "/user/terms-and-conditions/ar", element: <TermsArabic /> },
           { path: "/user/how-to/ar", element: <HowtoGetArabic /> },
-
         ],
       },
-      
+      {
+        path: "/bank",
+        element: <DemoFacingLayout />,
+        children: [
+          { path: "/bank/dashboard", element: <DemoDashboard /> },
+          { path: "/bank/offers", element: <DemoOffers /> },
+          { path: "/bank/history", element: <DemoHistory /> },
+          { path: "/bank/coupon", element: <DemoCouponDetails /> },
+          { path: "/bank/brands", element: <DemoBrands /> },
+          { path: "/bank/categories", element: <DemoCategories /> },
+          { path: "/bank/support", element: <UserSupport /> },
+          { path: "/bank/terms-and-conditions", element: <Terms /> },
+          { path: "/bank/how-to", element: <DemoHowtoGet /> },
+        ],
+      },
     ],
   },
 ]);

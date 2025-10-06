@@ -9,7 +9,7 @@ import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import sdkApi from "../../api/sdk";
 import OfferView from "../../components/User-Facing/OfferView";
 
-const UserOffers = () => {
+const DemoOffers = () => {
   const [activeCategory, setActiveCategory] = useState("");
   const [offerData, setOfferData] = useState([]);
   const [page, setPage] = useState(1);
@@ -208,7 +208,7 @@ const UserOffers = () => {
               offerData?.map((offer, index) => {
                 const params = new URLSearchParams(searchParams);
                 params.set("couponId", offer?._id);
-                const couponUrl = `/user/coupon?${params.toString()}`;
+                const couponUrl = `/bank/coupon?${params.toString()}`;
 
                 return (
                   <div key={index}>
@@ -240,4 +240,4 @@ const UserOffers = () => {
   );
 };
 
-export default UserOffers;
+export default DemoOffers;
