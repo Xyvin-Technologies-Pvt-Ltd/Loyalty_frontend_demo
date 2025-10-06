@@ -13,35 +13,16 @@ import PropTypes from "prop-types";
 
 const DemoLayout = ({ children, currentPage = "home" }) => {
   const [activePage, setActivePage] = useState(currentPage);
-  const [tierColor, setTierColor] = useState("#DF9872");
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
   const { isAuthenticated, customerID, apiKey, name, customerData, apiStatus } =
     useCustomerAuth();
+
   useEffect(() => {
     if (customerData !== null && customerData !== undefined) {
       setLoading(false);
-    }
-  }, [customerData]);
-
-  useEffect(() => {
-    if (customerData) {
-      const tier = customerData?.customer_tier?.en;
-      switch (tier) {
-        case "Bronze":
-          setTierColor("#DF9872");
-          break;
-        case "Silver":
-          setTierColor("#C0C0C0");
-          break;
-        case "Gold":
-          setTierColor("#FFD700");
-          break;
-        default:
-          setTierColor("#DF9872");
-      }
     }
   }, [customerData]);
 
@@ -50,7 +31,7 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
     if (path.includes("dashboard")) setActivePage("home");
     else if (path.includes("history")) setActivePage("history");
     else if (path.includes("offers")) setActivePage("offers");
-    else if (path.includes("support")) setActivePage("support");
+    else if (path.includes("categories")) setActivePage("categories");
   }, [location.pathname]);
 
   const navigationItems = [
@@ -104,33 +85,37 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-black-500"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#0b051f]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-fuchsia-500"></div>
       </div>
     );
   }
 
   if (apiStatus === 404) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <h1 className="text-2xl font-semibold text-gray-800">
+      <div className="min-h-screen flex items-center justify-center bg-[#0b051f] text-white">
+        <h1 className="text-2xl font-semibold text-fuchsia-400">
           404 – Customer Not Found
         </h1>
       </div>
     );
   }
+
   if (loading || customerData === null) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-gray-500"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#0b051f]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-fuchsia-500"></div>
       </div>
     );
   }
+
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 poppins-text">
-      <main className="min-h-screen">{children}</main>
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-50">
-        <div className="flex items-center justify-around max-w-md mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-[#1c0632] via-[#25084a] to-[#100223] poppins-text text-white">
+      <main className="pb-28 relative z-10">{children}</main>
+
+      {/* Floating Frosted Nav Bar */}
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[92%] max-w-md bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] px-4 py-2 z-50">
+        <div className="flex items-center justify-around">
           {navigationItems.map((item) => {
             const isActive = activePage === item.id;
             const IconComponent = isActive ? item.activeIcon : item.icon;
@@ -138,20 +123,32 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
               <button
                 key={item.id}
                 onClick={() => handleNavigation(item)}
-                className={`flex flex-col items-center space-y-1 py-2 px-3 rounded-lg transition-colors ${
+                className={`flex flex-col items-center justify-center space-y-1 py-2 px-3 rounded-2xl transition-all duration-300 ${
                   isActive
-                    ? "font-semibold"
-                    : "text-gray-500 hover:text-gray-700"
+                    ? "text-white scale-105"
+                    : "text-gray-400 hover:text-gray-300"
                 }`}
-                style={isActive ? { color: tierColor } : {}}
+                style={
+                  isActive
+                    ? {
+                        background:
+                          "linear-gradient(to bottom right, rgba(216,128,255,0.6), rgba(255,156,243,0.5))",
+                        boxShadow:
+                          "0 0 25px rgba(234,76,255,0.6), inset 0 0 10px rgba(255,255,255,0.3)",
+                      }
+                    : {}
+                }
               >
                 <IconComponent className="w-6 h-6" />
-                <span className="text-xs font-medium">{item.label}</span>
+                <span className="text-[11px] font-medium">{item.label}</span>
               </button>
             );
           })}
         </div>
       </div>
+
+      {/* Ambient background glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-fuchsia-600/30 rounded-full blur-3xl opacity-30 pointer-events-none"></div>
     </div>
   );
 };
