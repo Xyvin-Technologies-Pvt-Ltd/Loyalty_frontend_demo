@@ -109,14 +109,10 @@ const DemoCouponDetails = () => {
             Terms and Conditions
           </p>
         </div>
-        {offerData?.is_eligible === true ? (
-          <AppMainButton
-            name="Redeem Coupon"
-            onClick={() => setShowRedeemCard(true)}
-          />
-        ) : (
-          <AppMainButton name="Upgrade to redeem this offer" disabled={true} />
-        )}
+        <AppMainButton
+          name="Redeem Coupon"
+          onClick={() => setShowRedeemCard(true)}
+        />
       </div>
 
       {showRedeemCard && (
