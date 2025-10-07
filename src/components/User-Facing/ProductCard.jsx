@@ -26,7 +26,7 @@ const ProductCard = ({ product, onClick }) => {
         </div>
       </div>
       <div className="mb-1 p-2 poppins-text">
-        <span className="text-sm font-semibold leading-tight  line-clamp-2">
+        <span className="text-sm font-semibold leading-tight  line-clamp-2 text-black">
           {product?.title?.en}
         </span>
 
