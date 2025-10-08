@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
 import Layout from "../ui/Layout";
 import PointsCriteria from "../pages/points-management/PointsCriteria";
 import Tiers from "../pages/points-management/Tiers";
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
-      { path: "/", element: <LoginPage /> },
+      { path: "/", element: <Navigate to="/bank/dashboard?customerID=77751283&apiKey=H0RIRxapB4Uo7im" replace /> },
       { path: "/demo", element: <DemoPage /> },
       { path: "/auth-demo", element: <AuthDemo /> },
       {

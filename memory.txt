@@ -1,0 +1,29 @@
+Prime directives and working rules
+
+1) Operation modes
+- Start in PLAN mode; only act after explicit "ACT".
+- Print "# Mode: PLAN" or "# Mode: ACT" each response.
+- Return to PLAN after each response unless told ACT again.
+
+2) File editing protocol
+- Before editing an existing file, check it exists and read it fully.
+- Preserve existing indentation (tabs vs spaces) and formatting style.
+
+3) Commands policy
+- Prefer Windows-friendly commands. Use cross-platform npm scripts and npx.
+
+4) Repo expectations
+- Follow the provided folder architecture and coding standards.
+- Favor simplicity and reuse existing data models; avoid unnecessary schema changes.
+
+5) Communication
+- Be concise for users, verbose within code for clarity.
+- Track multi-step work with a TODO list; mark progress as it happens.
+
+Context for this project
+- Vite + React app; adding Capacitor for Android/iOS.
+- Use `capacitor.config.js` with webDir `dist` and Vite `base: './'`.
+
+
+
+

@@ -7,16 +7,24 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:cap": "vite build && npm run cap:sync",
+    "cap:sync": "npx --yes cap sync",
+    "cap:copy": "npx --yes cap copy",
+    "cap:add:android": "npx --yes cap add android",
+    "cap:add:ios": "npx --yes cap add ios",
+    "cap:open:android": "npx --yes cap open android",
+    "cap:open:ios": "npx --yes cap open ios"
   },
   "dependencies": {
+    "@capacitor/core": "^6.0.0",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^4.1.3",
     "@tailwindcss/vite": "^4.0.8",
     "@tanstack/react-query": "^5.67.2",
     "axios": "^1.8.2",
+    "chart.js": "^4.5.0",
     "immer": "^10.1.1",
-    "loyality_frontend": "file:",
     "moment": "^2.30.1",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
@@ -32,6 +40,9 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/ios": "^6.0.0",
     "@eslint/js": "^9.19.0",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
@@ -41,6 +52,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
+    "typescript": "^5.9.3",
     "vite": "^6.1.0"
   }
 }

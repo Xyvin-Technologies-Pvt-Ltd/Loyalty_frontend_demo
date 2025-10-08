@@ -21,10 +21,13 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
     useCustomerAuth();
 
   useEffect(() => {
+    // Set loading to false when we have customer data OR when we're not authenticated
     if (customerData !== null && customerData !== undefined) {
       setLoading(false);
+    } else if (!isAuthenticated) {
+      setLoading(false);
     }
-  }, [customerData]);
+  }, [customerData, isAuthenticated]);
 
   useEffect(() => {
     const path = location.pathname;
@@ -85,8 +88,21 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0b051f]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-fuchsia-500"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#0b051f] text-white">
+        <div className="text-center">
+          <h1 className="text-2xl font-semibold text-fuchsia-400 mb-4">
+            Authentication Required
+          </h1>
+          <p className="text-gray-300 mb-6">
+            Please provide customerID and apiKey parameters to access the dashboard.
+          </p>
+          <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
+            <p className="text-sm text-gray-300 mb-2">Example URL:</p>
+            <code className="text-fuchsia-300 text-xs break-all">
+              /bank/dashboard?customerID=your_customer_id&apiKey=your_api_key
+            </code>
+          </div>
+        </div>
       </div>
     );
   }
@@ -101,7 +117,7 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
     );
   }
 
-  if (loading || customerData === null) {
+  if (loading && isAuthenticated && customerData === null) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#0b051f]">
         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-fuchsia-500"></div>

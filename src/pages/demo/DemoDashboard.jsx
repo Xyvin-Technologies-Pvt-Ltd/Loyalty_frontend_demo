@@ -8,6 +8,7 @@ import {
 import sdkApi from "../../api/sdk";
 import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import { useNavigationWithParams } from "../../utils/navigationUtils";
+import { getImageUrl, handleImageError } from "../../utils/imageUtils";
 import logo from "../../assets/WhatsApp Image 2025-10-05 at 14.08.37_008691b7.jpg";
 
 const SkeletonBox = ({ className }) => (
@@ -81,9 +82,10 @@ const DemoDashboard = () => {
 
           <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-2xl flex items-center justify-center shadow-2xl hover:shadow-purple-500/30 transition-all hover:scale-105 duration-500">
             <img
-              src={logo}
+              src={getImageUrl(logo)}
               alt="logo"
               className="w-14 h-14 rounded-xl object-cover shadow-lg"
+              onError={(e) => handleImageError(e)}
             />
           </div>
         </div>
@@ -240,9 +242,10 @@ const PremiumOfferCard = ({ data, index, navigateWithParams }) => {
       style={{ animationDelay: `${index * 100}ms` }}
     >
       <img
-        src={posterImage}
+        src={getImageUrl(posterImage)}
         alt={merchantId?.title?.en || title}
         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        onError={(e) => handleImageError(e)}
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
@@ -301,9 +304,10 @@ const BrandCard = ({ brand, index, onClick }) => (
   >
     <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-3 bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-white/10">
       <img
-        src={brand.image}
+        src={getImageUrl(brand.image)}
         alt={brand.name}
         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        onError={(e) => handleImageError(e)}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
     </div>
@@ -323,9 +327,10 @@ const CategoryCard = ({ category, index, onClick }) => (
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-0 group-hover:opacity-30 blur-xl transition-opacity"></div>
       <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-2xl mb-2 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 group-hover:border-purple-400/50 transition-all group-active:scale-95">
         <img
-          src={category.image}
+          src={getImageUrl(category.image)}
           alt={category.title?.en}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          onError={(e) => handleImageError(e)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent"></div>
       </div>
