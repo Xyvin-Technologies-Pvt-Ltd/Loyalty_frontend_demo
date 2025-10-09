@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getImageUrl, handleImageError } from "../../utils/imageUtils";
 
 const ProductCard = ({ product, onClick }) => {
   const [expanded, setExpanded] = useState(false);
@@ -10,40 +11,41 @@ const ProductCard = ({ product, onClick }) => {
     expanded || !shouldTruncate
       ? description
       : description.slice(0, maxChars) + "...";
+
   return (
     <div
-      className="rounded-[8px] border-2 border-[#E3E3E3] bg-white shadow-lg cursor-pointer"
       onClick={onClick}
+      className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-3 border border-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all active:scale-95 cursor-pointer"
     >
-      <div className="flex justify-between items-center mb-2">
-        <div className="w-full h-45 ">
-          {" "}
-          <img
-            src={product?.merchantId?.image || product?.image}
-            alt="Brand Logo"
-            className="w-full h-full object-cover rounded-t-[8px] "
-          />
-        </div>
+      <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-3 bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-white/10">
+        <img
+          src={getImageUrl(product?.image || product?.merchantId?.image)}
+          alt={product?.title?.en}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          onError={(e) => handleImageError(e)}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
       </div>
-      <div className="mb-1 p-2 poppins-text">
-        <span className="text-sm font-semibold leading-tight  line-clamp-2 text-black">
-          {product?.title?.en}
-        </span>
 
-        <div className="flex items-center justify-between mt-2">
-          <div className="text-xs text-[#4E4E4E]">
-            {displayText}
-            {shouldTruncate && (
-              <button
-                onClick={() => setExpanded(!expanded)}
-                className="text-blue-500 ml-1  text-[10px]"
-              >
-                {expanded ? "Read less" : "Read more"}
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
+      <h3 className="text-sm font-bold text-white mb-1 line-clamp-1">
+        {product?.title?.en || "Untitled"}
+      </h3>
+
+      <p className="text-[11px] text-purple-200 leading-snug overflow-hidden">
+        {displayText}
+        {shouldTruncate && (
+          <button
+          type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setExpanded(!expanded);
+            }}
+            className="text-purple-400 ml-1 text-[10px] font-semibold hover:underline"
+          >
+            {expanded ? "Read less" : "Read more"}
+          </button>
+        )}
+      </p>
     </div>
   );
 };

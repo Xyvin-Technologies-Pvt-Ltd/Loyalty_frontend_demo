@@ -237,7 +237,7 @@ const PremiumOfferCard = ({ data, index, navigateWithParams }) => {
 
   return (
     <div
-      onClick={() => navigateWithParams("/user/coupon", { couponId: _id })}
+      onClick={() => navigateWithParams("/bank/coupon", { couponId: _id })}
       className="relative min-w-[220px] aspect-square rounded-3xl overflow-hidden shadow-xl hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all cursor-pointer group border border-white/10 bg-white/5 backdrop-blur-2xl"
       style={{ animationDelay: `${index * 100}ms` }}
     >
