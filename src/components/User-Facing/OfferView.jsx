@@ -1,12 +1,10 @@
 import { CalendarDateRangeIcon } from "@heroicons/react/24/outline";
 import moment from "moment/moment";
-moment.locale("en");
 
 const OfferView = ({ product, onClick }) => {
-  const getDiscountLabel = () => {
-    if (!product?.discountDetails) return "";
-    const { type, value } = product.discountDetails;
-    return type === "FIXED" ? `OMR ${value} off` : `${value}% off`;
+  // Force English locale for this component
+  const formatDate = (date) => {
+    return moment(date).locale('en').format("DD MMM YYYY");
   };
 
   return (
@@ -21,14 +19,6 @@ const OfferView = ({ product, onClick }) => {
           alt={product?.title?.en}
           className="w-20 h-20 rounded-lg object-cover"
         />
-
-        {product?.merchantId?.image && (
-          <img
-            src={product?.merchantId?.image}
-            alt={product?.merchantId?.title?.en}
-            className="absolute top-1 left-1 w-[37px] h-[37px] rounded-lg bg-black/20 p-[0.6px] object-contain shadow"
-          />
-        )}
       </div>
 
       {/* Details */}
@@ -47,16 +37,9 @@ const OfferView = ({ product, onClick }) => {
           <div className="flex items-center gap-1 text-green-400 text-sm">
             <CalendarDateRangeIcon className="w-4 h-4" />
             <span>
-              {moment(product?.validityPeriod?.startDate).format("DD MMM YYYY")} –{" "}
-              {moment(product?.validityPeriod?.endDate).format("DD MMM YYYY")}
+              {formatDate(product?.validityPeriod?.startDate)} – {formatDate(product?.validityPeriod?.endDate)}
             </span>
           </div>
-{/* 
-          {product?.discountDetails && (
-            <span className="text-xs font-semibold text-white bg-purple-600/30 px-2 py-1 rounded-md">
-              {getDiscountLabel()}
-            </span>
-          )} */}
         </div>
       </div>
     </div>

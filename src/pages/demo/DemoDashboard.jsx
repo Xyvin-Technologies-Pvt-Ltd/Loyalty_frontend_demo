@@ -10,6 +10,7 @@ import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import { useNavigationWithParams } from "../../utils/navigationUtils";
 import { getImageUrl, handleImageError } from "../../utils/imageUtils";
 import logo from "../../assets/WhatsApp Image 2025-10-05 at 14.08.37_008691b7.jpg";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const SkeletonBox = ({ className }) => (
   <div
@@ -60,12 +61,10 @@ const DemoDashboard = () => {
       ></div>
 
       <div className="relative px-6 pt-12 pb-10 flex items-center justify-between">
-        {/* Animated gradient glow background */}
         <div className="absolute -top-20 left-1/3 w-72 h-72 bg-purple-600/30 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-10 right-1/4 w-64 h-64 bg-pink-500/30 rounded-full blur-3xl animate-ping"></div>
         <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl animate-pulse"></div>
 
-        {/* Welcome text on left */}
         <div className="relative z-10 flex flex-col items-start">
           <h2 className="text-sm text-purple-200 font-medium tracking-wide">
             Welcome back,
@@ -76,7 +75,6 @@ const DemoDashboard = () => {
           <div className="mt-3 w-20 h-1 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-pulse"></div>
         </div>
 
-        {/* Floating logo card on right */}
         <div className="relative z-10 group">
           <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-600 to-pink-500 blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
 
@@ -90,6 +88,7 @@ const DemoDashboard = () => {
           </div>
         </div>
       </div>
+
       <div className="relative px-6">
         <div className="grid grid-cols-4 gap-3 mb-8">
           {[
@@ -132,6 +131,7 @@ const DemoDashboard = () => {
             </button>
           ))}
         </div>
+
         <SectionHeader
           title="Exclusive Offers"
           icon={<FireIcon className="w-5 h-5 text-orange-400" />}
@@ -179,6 +179,7 @@ const DemoDashboard = () => {
                   />
                 ))}
         </div>
+
         <SectionHeader
           title="Browse Categories"
           icon={<Squares2X2Icon className="w-5 h-5 text-emerald-400" />}
@@ -221,6 +222,11 @@ const PremiumOfferCard = ({ data, index, navigateWithParams }) => {
     validityPeriod,
     _id,
   } = data;
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  params.set("couponId", _id);
+  const couponUrl = `/bank/coupon?${params.toString()}`;
 
   const discountLabel =
     discountDetails?.type === "PERCENTAGE"
@@ -237,7 +243,9 @@ const PremiumOfferCard = ({ data, index, navigateWithParams }) => {
 
   return (
     <div
-      onClick={() => navigateWithParams("/bank/coupon", { couponId: _id })}
+      onClick={() => {
+        navigate(couponUrl);
+      }}
       className="relative min-w-[220px] aspect-square rounded-3xl overflow-hidden shadow-xl hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all cursor-pointer group border border-white/10 bg-white/5 backdrop-blur-2xl"
       style={{ animationDelay: `${index * 100}ms` }}
     >
