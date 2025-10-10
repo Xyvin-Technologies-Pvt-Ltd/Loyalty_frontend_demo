@@ -16,7 +16,7 @@ const DemoSettings = () => {
     clearCustomerAuth();
     localStorage.removeItem("customerAuth");
     sessionStorage.clear();
-    navigate("/bank/login");
+    navigate("/");
   };
 
   return (
