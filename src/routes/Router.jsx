@@ -60,6 +60,7 @@ import DemoCouponDetails from "../pages/demo/DemoOfferDetails";
 import DemoBrands from "../pages/demo/DemoBrands";
 import DemoCategories from "../pages/demo/DemoCategories";
 import DemoHowtoGet from "../pages/demo/DemoHowToGer";
+import DemoLogin from "../pages/demo/DemoLogin";
 const RootLayout = () => (
   <AuthProvider>
     <Outlet />
@@ -95,7 +96,7 @@ const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
-      { path: "/", element: <Navigate to="/bank/dashboard?customerID=77751283&apiKey=H0RIRxapB4Uo7im" replace /> },
+      { path: "/", element:<DemoLogin /> },
       { path: "/demo", element: <DemoPage /> },
       { path: "/auth-demo", element: <AuthDemo /> },
       {
