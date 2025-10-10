@@ -4,7 +4,6 @@ import RedeemCard from "../../components/User-Facing/RedeemCard";
 import { useEffect, useState } from "react";
 import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import sdkApi from "../../api/sdk";
-import { AppMainButton } from "../../ui/AppMainButton";
 import moment from "moment";
 
 const DemoCouponDetails = () => {

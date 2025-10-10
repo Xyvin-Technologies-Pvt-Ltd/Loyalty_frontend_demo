@@ -56,7 +56,7 @@ const RedeemCard = ({ onClose, image }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl pb-6 relative">
+    <div className=" pb-6 relative rounded-3xl shadow-2xl border border-white/20">
       <button
         onClick={onClose}
         className="absolute top-3 right-3 z-10 text-gray-600 rounded-full p-1 shadow hover:bg-gray-100"
@@ -79,7 +79,7 @@ const RedeemCard = ({ onClose, image }) => {
         </h3>
         <div className="grid grid-cols-4 gap-3 px-4 py-4">
           {code.map((digit, index) => (
-            <input
+           <input
               key={index}
               id={`code-${index}`}
               type="text"
@@ -89,22 +89,34 @@ const RedeemCard = ({ onClose, image }) => {
               maxLength={1}
               inputMode="numeric"
               pattern="\d{1}"
-              className="w-[48px] h-[58px] text-center text-lg font-semibold border border-[#FFD95E] rounded-[10px] bg-[#FFFBF5] focus:outline-none poppins-text"
+              className="w-full h-14 text-center text-xl font-bold border-2 border-purple-400/50 rounded-xl bg-white/10 backdrop-blur-sm text-white placeholder-purple-300 focus:outline-none focus:border-purple-400 focus:bg-white/20 transition-all poppins-text"
             />
           ))}
         </div>
-        <AppMainButton loading={loading} onClick={handleSubmit} name="Redeem" />
+       <button
+          onClick={handleSubmit}
+          disabled={loading}
+          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-purple-500/30 transition-all duration-300 hover:shadow-purple-500/50 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        >
+          {loading ? (
+            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          ) : (
+            <>
+              Redeem Coupon
+            </>
+          )}
+        </button>
       </div>
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-[9999]">
-          <div className="bg-white rounded-2xl shadow-2xl p-8 flex flex-col items-center max-w-sm mx-4 text-center animate-fadeInUp relative border border-gray-100">
+          <div className="bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950 rounded-2xl shadow-2xl p-8 flex flex-col items-center max-w-sm mx-4 text-center animate-fadeInUp relative border border-gray-100">
             <button
               onClick={() => {
                 setShowPopup(null);
                 setErrorMessage("");
                 onClose();
               }}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 hover:bg-gray-50 rounded-full p-2 transition-all duration-200 hover:scale-110"
+              className="absolute top-4 right-4 text-white hover:text-gray-700 hover:bg-gray-50 rounded-full p-2 transition-all duration-200 hover:scale-110"
               aria-label="Close popup"
             >
               <XMarkIcon className="w-6 h-6" />
@@ -119,7 +131,7 @@ const RedeemCard = ({ onClose, image }) => {
                   <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-orange-400 rounded-full animate-ping delay-300"></div>
                 </div>
 
-                <p className="font-medium text-sm text-gray-800 leading-6 alexandria-text px-2">
+                <p className="font-medium text-sm text-white leading-6 alexandria-text px-2">
                   Hey {customerName || "Customer"},
                   <br />
                   Your coupon has been successfully redeemed 🎁
