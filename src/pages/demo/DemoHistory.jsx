@@ -111,8 +111,6 @@ const DemoHistory = () => {
         }
 
         const response = await sdkApi.getTransactionHistory(
-          customerID,
-          apiKey,
           pageToLoad,
           PAGE_SIZE
         );

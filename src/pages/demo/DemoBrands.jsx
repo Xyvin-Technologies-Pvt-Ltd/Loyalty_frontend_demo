@@ -16,15 +16,13 @@ const DemoBrands = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
-
-  const { customerID, apiKey } = useCustomerAuth();
   const navigate = useNavigate();
   const { navigateWithParams } = useNavigationWithParams();
 
   const fetchData = async (reset = false) => {
     try {
       setLoading(true);
-      const brandData = await sdkApi.getBrands(customerID, apiKey, {
+      const brandData = await sdkApi.getBrands({
         page: reset ? 1 : page,
         limit: rows,
         search: searchTerm,

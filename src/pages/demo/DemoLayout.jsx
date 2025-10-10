@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
-import { HomeIcon, ClockIcon, TagIcon } from "@heroicons/react/24/outline";
+import {
+  HomeIcon,
+  ClockIcon,
+  TagIcon,
+  Cog6ToothIcon,
+} from "@heroicons/react/24/outline";
 import {
   HomeIcon as HomeSolidIcon,
   ClockIcon as ClockSolidIcon,
   TagIcon as TagSolidIcon,
   Squares2X2Icon,
   Squares2X2Icon as Squares2X2SolidIcon,
+  Cog6ToothIcon as Cog6ToothSolidIcon,
 } from "@heroicons/react/24/solid";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCustomerAuth } from "../../hooks/useCustomerAuth";
@@ -21,7 +27,6 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
     useCustomerAuth();
 
   useEffect(() => {
-    // Set loading to false when we have customer data OR when we're not authenticated
     if (customerData !== null && customerData !== undefined) {
       setLoading(false);
     } else if (!isAuthenticated) {
@@ -35,6 +40,7 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
     else if (path.includes("history")) setActivePage("history");
     else if (path.includes("offers")) setActivePage("offers");
     else if (path.includes("categories")) setActivePage("categories");
+    else if (path.includes("settings")) setActivePage("settings");
   }, [location.pathname]);
 
   const navigationItems = [
@@ -65,6 +71,13 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
       icon: TagIcon,
       activeIcon: TagSolidIcon,
       href: "/bank/offers",
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      icon: Cog6ToothIcon,
+      activeIcon: Cog6ToothSolidIcon,
+      href: "/bank/settings",
     },
   ];
 

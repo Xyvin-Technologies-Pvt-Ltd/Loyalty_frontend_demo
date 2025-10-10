@@ -23,8 +23,6 @@ const DemoOffers = () => {
   const [initialLoading, setInitialLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
-
-  const { customerID, apiKey } = useCustomerAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +34,7 @@ const DemoOffers = () => {
       setLoading(true);
       const currentPage = resetData ? 1 : page;
 
-      const offers = await sdkApi.getMerchantOffers(customerID, apiKey, {
+      const offers = await sdkApi.getMerchantOffers({
         categoryId: activeCategory,
         page: currentPage,
         limit: rows,
@@ -63,7 +61,7 @@ const DemoOffers = () => {
 
   const fetchCategories = async () => {
     try {
-      const categoriesData = await sdkApi.getCategories(customerID, apiKey, {
+      const categoriesData = await sdkApi.getCategories({
         limit: 100,
       });
       const allCategory = { _id: "", title: { en: "All" } };
@@ -74,8 +72,8 @@ const DemoOffers = () => {
   };
 
   useEffect(() => {
-    if (customerID && apiKey) fetchCategories();
-  }, [customerID, apiKey]);
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     setOfferData([]);
@@ -84,8 +82,8 @@ const DemoOffers = () => {
   }, [activeCategory, searchQuery]);
 
   useEffect(() => {
-    if (customerID && apiKey) fetchOfferData(true);
-  }, [customerID, apiKey, activeCategory, searchQuery]);
+    fetchOfferData(true);
+  }, [ activeCategory, searchQuery]);
 
   const handleSearchChange = useCallback(
     (value) => {
@@ -192,9 +190,7 @@ const DemoOffers = () => {
                       product={offer}
                     />
                     {index !== offerData.length - 1 && (
-                      <div
-                        className="my-2 border-b border-white/10"
-                      />
+                      <div className="my-2 border-b border-white/10" />
                     )}
                   </div>
                 );

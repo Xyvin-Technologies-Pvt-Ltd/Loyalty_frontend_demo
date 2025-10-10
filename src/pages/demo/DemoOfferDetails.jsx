@@ -10,7 +10,6 @@ const DemoCouponDetails = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [offerData, setOfferData] = useState(null);
-  const { customerID, apiKey } = useCustomerAuth();
   const couponId = searchParams.get("couponId");
   const [showRedeemCard, setShowRedeemCard] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -19,7 +18,7 @@ const DemoCouponDetails = () => {
     const fetchOfferData = async () => {
       try {
         setLoading(true);
-        const offers = await sdkApi.getCouponId(couponId, customerID, apiKey);
+        const offers = await sdkApi.getCouponId(couponId);
         setOfferData(offers.data);
       } catch (err) {
         console.error("Error fetching offer data:", err);
@@ -28,7 +27,7 @@ const DemoCouponDetails = () => {
       }
     };
     fetchOfferData();
-  }, [customerID, apiKey, couponId]);
+  }, [ couponId]);
 
   if (loading) {
     return (

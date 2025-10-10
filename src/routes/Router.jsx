@@ -61,6 +61,7 @@ import DemoBrands from "../pages/demo/DemoBrands";
 import DemoCategories from "../pages/demo/DemoCategories";
 import DemoHowtoGet from "../pages/demo/DemoHowToGer";
 import DemoLogin from "../pages/demo/DemoLogin";
+import DemoSettings from "../pages/demo/DemoSettings";
 const RootLayout = () => (
   <AuthProvider>
     <Outlet />
@@ -163,6 +164,7 @@ const router = createBrowserRouter([
         element: <DemoFacingLayout />,
         children: [
           { path: "/bank/dashboard", element: <DemoDashboard /> },
+          { path: "/bank/settings", element: <DemoSettings/> },
           { path: "/bank/offers", element: <DemoOffers /> },
           { path: "/bank/history", element: <DemoHistory /> },
           { path: "/bank/coupon", element: <DemoCouponDetails /> },

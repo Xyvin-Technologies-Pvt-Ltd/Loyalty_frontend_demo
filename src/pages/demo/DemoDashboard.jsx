@@ -20,7 +20,7 @@ const SkeletonBox = ({ className }) => (
 
 const DemoDashboard = () => {
   const { navigateWithParams } = useNavigationWithParams();
-  const { customerID, apiKey, customerData } = useCustomerAuth();
+  const { customerData } = useCustomerAuth();
   const [offerData, setOfferData] = useState([]);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -30,9 +30,9 @@ const DemoDashboard = () => {
     const fetchCustomerData = async () => {
       try {
         const [offers, brandData, categoriesData] = await Promise.all([
-          sdkApi.getMerchantOffers(customerID, apiKey, { limit: 20 }),
-          sdkApi.getBrands(customerID, apiKey, { limit: 20 }),
-          sdkApi.getCategories(customerID, apiKey, { limit: 20 }),
+          sdkApi.getMerchantOffers({ limit: 20 }),
+          sdkApi.getBrands({ limit: 20 }),
+          sdkApi.getCategories({ limit: 20 }),
         ]);
 
         setOfferData(offers.data || []);
@@ -46,7 +46,7 @@ const DemoDashboard = () => {
     };
 
     fetchCustomerData();
-  }, [customerID, apiKey]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pb-6 relative overflow-hidden">

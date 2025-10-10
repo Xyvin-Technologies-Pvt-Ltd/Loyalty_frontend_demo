@@ -5,7 +5,6 @@ import {
 import { useEffect, useState } from "react";
 import ProductCard from "../../components/User-Facing/ProductCard";
 import { useNavigate } from "react-router-dom";
-import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import sdkApi from "../../api/sdk";
 import { useNavigationWithParams } from "../../utils/navigationUtils";
 
@@ -16,15 +15,13 @@ const DemoCategories = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
-
-  const { customerID, apiKey } = useCustomerAuth();
   const navigate = useNavigate();
   const { navigateWithParams } = useNavigationWithParams();
 
   const fetchData = async (reset = false) => {
     try {
       setLoading(true);
-      const categoryData = await sdkApi.getCategories(customerID, apiKey, {
+      const categoryData = await sdkApi.getCategories({
         page: reset ? 1 : page,
         limit: rows,
         search: searchTerm,
@@ -49,10 +46,8 @@ const DemoCategories = () => {
   };
 
   useEffect(() => {
-    if (customerID && apiKey) {
-      fetchData(true);
-    }
-  }, [customerID, apiKey, searchTerm]);
+    fetchData(true);
+  }, []);
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
