@@ -63,11 +63,8 @@ import DemoHowtoGet from "../pages/demo/DemoHowToGer";
 import DemoLogin from "../pages/demo/DemoLogin";
 import DemoSettings from "../pages/demo/DemoSettings";
 import BankProtectedLayout from "./ProtectedLayout";
-import BackButtonHandler from "../components/BackButtonHandler";
-
 const RootLayout = () => (
   <AuthProvider>
-    <BackButtonHandler />
     <Outlet />
   </AuthProvider>
 );
@@ -93,16 +90,15 @@ const ArabicFacingLayout = () => (
 
 const DemoFacingLayout = () => (
   <DemoLayout>
-    <BackButtonHandler />
     <ScrollToTop />
     <Outlet />
   </DemoLayout>
 );
 const router = createBrowserRouter([
   {
-    element: <DemoFacingLayout />,
+    element: <RootLayout />,
     children: [
-      { path: "/", element: <DemoDashboard /> },
+      { path: "/", element: <DemoLogin /> },
       { path: "/demo", element: <DemoPage /> },
       { path: "/auth-demo", element: <AuthDemo /> },
       {

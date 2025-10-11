@@ -59,6 +59,7 @@ const DemoLogin = () => {
           apiKey: "H0RIRxapB4Uo7im",
           token,
         });
+        console.log(has_mpin, "has_mpin");
         if (!has_mpin) {
           setStep(5);
         } else {
