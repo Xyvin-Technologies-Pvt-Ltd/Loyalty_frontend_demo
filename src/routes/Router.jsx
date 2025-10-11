@@ -62,6 +62,7 @@ import DemoCategories from "../pages/demo/DemoCategories";
 import DemoHowtoGet from "../pages/demo/DemoHowToGer";
 import DemoLogin from "../pages/demo/DemoLogin";
 import DemoSettings from "../pages/demo/DemoSettings";
+import BankProtectedLayout from "./ProtectedLayout";
 const RootLayout = () => (
   <AuthProvider>
     <Outlet />
@@ -159,22 +160,28 @@ const router = createBrowserRouter([
           { path: "/user/how-to/ar", element: <HowtoGetArabic /> },
         ],
       },
-      {
-        path: "/bank",
-        element: <DemoFacingLayout />,
-        children: [
-          { path: "/bank/dashboard", element: <DemoDashboard /> },
-          { path: "/bank/settings", element: <DemoSettings/> },
-          { path: "/bank/offers", element: <DemoOffers /> },
-          { path: "/bank/history", element: <DemoHistory /> },
-          { path: "/bank/coupon", element: <DemoCouponDetails /> },
-          { path: "/bank/brands", element: <DemoBrands /> },
-          { path: "/bank/categories", element: <DemoCategories /> },
-          { path: "/bank/support", element: <UserSupport /> },
-          { path: "/bank/terms-and-conditions", element: <Terms /> },
-          { path: "/bank/how-to", element: <DemoHowtoGet /> },
-        ],
-      },
+    {
+  path: "/bank",
+  element: <BankProtectedLayout />, // Handles authentication
+  children: [
+    {
+      element: <DemoFacingLayout />, // Wraps all /bank routes in DemoLayout
+      children: [
+        { path: "/bank/dashboard", element: <DemoDashboard /> },
+        { path: "/bank/settings", element: <DemoSettings /> },
+        { path: "/bank/offers", element: <DemoOffers /> },
+        { path: "/bank/history", element: <DemoHistory /> },
+        { path: "/bank/coupon", element: <DemoCouponDetails /> },
+        { path: "/bank/brands", element: <DemoBrands /> },
+        { path: "/bank/categories", element: <DemoCategories /> },
+        { path: "/bank/support", element: <UserSupport /> },
+        { path: "/bank/terms-and-conditions", element: <Terms /> },
+        { path: "/bank/how-to", element: <DemoHowtoGet /> },
+      ],
+    },
+  ],
+},
+
     ],
   },
 ]);

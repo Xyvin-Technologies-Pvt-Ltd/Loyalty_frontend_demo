@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PhoneIcon,
   EyeIcon,
@@ -22,9 +22,14 @@ const DemoLogin = () => {
   const [showMpin, setShowMpin] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [authToken, setAuthToken] = useState("");
   const { setCustomerAuth } = useAuthUser();
 
+  useEffect(() => {
+    const token = localStorage.getItem("jhiejwfiuewyfwuakhfw");
+    if (token) {
+      navigate("/bank/dashboard");
+    }
+  }, [navigate]);
   const sendOtp = async (phone) => {
     try {
       setLoading(true);
@@ -49,7 +54,6 @@ const DemoLogin = () => {
       const response = await sdkApi.otpVerification({ phone, otp: otpCode });
       if (response) {
         const { token, customer_id, has_mpin } = response.data;
-        setAuthToken(token);
         setCustomerAuth({
           customerId: customer_id,
           apiKey: "H0RIRxapB4Uo7im",
@@ -78,12 +82,12 @@ const DemoLogin = () => {
       const response = await sdkApi.customerLogin({ phone, mpin: mpinCode });
       if (response) {
         const { token, customer_id } = response.data;
-        setAuthToken(token);
         setCustomerAuth({
           customerId: customer_id,
           apiKey: "H0RIRxapB4Uo7im",
           token,
         });
+        localStorage.setItem("jhiejwfiuewyfwuakhfw", token);
         setStep(6);
         setTimeout(() => navigate("/bank/dashboard"), 1500);
         return { success: true };
@@ -179,12 +183,18 @@ const DemoLogin = () => {
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl px-8 py-10 shadow-2xl border border-white/20">
             <div className="mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 animate-pulse mb-8" />
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-black text-white mb-2">Welcome Back</h1>
-              <p className="text-purple-200 text-sm">Enter your phone number to continue</p>
+              <h1 className="text-3xl font-black text-white mb-2">
+                Welcome Back
+              </h1>
+              <p className="text-purple-200 text-sm">
+                Enter your phone number to continue
+              </p>
             </div>
             <div className="space-y-5">
               <div>
-                <label className="block text-sm font-semibold text-white mb-2">Phone Number</label>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Phone Number
+                </label>
                 <div className="relative">
                   <PhoneIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-purple-300" />
                   <input
@@ -218,8 +228,12 @@ const DemoLogin = () => {
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl px-8 py-10 shadow-2xl border border-white/20">
             <div className="mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 animate-pulse mb-8" />
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-black text-white mb-2">Choose Login Method</h1>
-              <p className="text-purple-200 text-sm">How would you like to sign in?</p>
+              <h1 className="text-3xl font-black text-white mb-2">
+                Choose Login Method
+              </h1>
+              <p className="text-purple-200 text-sm">
+                How would you like to sign in?
+              </p>
             </div>
             <div className="space-y-4">
               <button
@@ -255,7 +269,8 @@ const DemoLogin = () => {
             <div className="text-center mb-8">
               <h1 className="text-3xl font-black text-white mb-2">Enter OTP</h1>
               <p className="text-purple-200 text-sm">
-                We sent a code to <span className="font-bold">{phoneNumber}</span>
+                We sent a code to{" "}
+                <span className="font-bold">{phoneNumber}</span>
               </p>
             </div>
             <div className="space-y-5">
@@ -263,8 +278,12 @@ const DemoLogin = () => {
                 type="text"
                 inputMode="numeric"
                 value={otp}
-                onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                onKeyDown={(e) => e.key === "Enter" && otp.length === 6 && handleOtpSubmit()}
+                onChange={(e) =>
+                  setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+                }
+                onKeyDown={(e) =>
+                  e.key === "Enter" && otp.length === 6 && handleOtpSubmit()
+                }
                 placeholder="Enter 6-digit OTP"
                 className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white text-center text-2xl tracking-widest placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-sm focus:border-transparent transition-all"
                 maxLength={6}
@@ -310,8 +329,12 @@ const DemoLogin = () => {
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl px-8 py-10 shadow-2xl border border-white/20">
             <div className="mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 animate-pulse mb-8" />
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-black text-white mb-2">Enter MPIN</h1>
-              <p className="text-purple-200 text-sm">Enter your 4-digit security PIN</p>
+              <h1 className="text-3xl font-black text-white mb-2">
+                Enter MPIN
+              </h1>
+              <p className="text-purple-200 text-sm">
+                Enter your 4-digit security PIN
+              </p>
             </div>
             <div className="space-y-5">
               <div className="flex justify-center gap-3 mb-6">
@@ -324,7 +347,11 @@ const DemoLogin = () => {
                         : "bg-white/5 border border-white/20 text-transparent"
                     }`}
                   >
-                    {showMpin && mpin[index] ? mpin[index] : mpin.length > index ? "•" : ""}
+                    {showMpin && mpin[index]
+                      ? mpin[index]
+                      : mpin.length > index
+                      ? "•"
+                      : ""}
                   </div>
                 ))}
               </div>
@@ -333,8 +360,12 @@ const DemoLogin = () => {
                   type={showMpin ? "text" : "password"}
                   inputMode="numeric"
                   value={mpin}
-                  onChange={(e) => setMpin(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                  onKeyDown={(e) => e.key === "Enter" && mpin.length === 4 && handleMpinSubmit()}
+                  onChange={(e) =>
+                    setMpin(e.target.value.replace(/\D/g, "").slice(0, 4))
+                  }
+                  onKeyDown={(e) =>
+                    e.key === "Enter" && mpin.length === 4 && handleMpinSubmit()
+                  }
                   placeholder="Enter 4-digit MPIN"
                   className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white text-center placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all"
                   maxLength={4}
@@ -345,7 +376,11 @@ const DemoLogin = () => {
                   onClick={() => setShowMpin(!showMpin)}
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 text-purple-300 hover:text-white transition-colors"
                 >
-                  {showMpin ? <EyeSlashIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                  {showMpin ? (
+                    <EyeSlashIcon className="w-5 h-5" />
+                  ) : (
+                    <EyeIcon className="w-5 h-5" />
+                  )}
                 </button>
               </div>
               {error && (
@@ -382,30 +417,45 @@ const DemoLogin = () => {
             <div className="mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 animate-pulse mb-8" />
             <div className="text-center mb-8">
               <h1 className="text-3xl font-black text-white mb-2">Set MPIN</h1>
-              <p className="text-purple-200 text-sm">Create a 4-digit PIN for quick login</p>
+              <p className="text-purple-200 text-sm">
+                Create a 4-digit PIN for quick login
+              </p>
             </div>
             <div className="space-y-5">
               <div>
-                <label className="block text-sm font-semibold text-white mb-2">New MPIN</label>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  New MPIN
+                </label>
                 <input
                   type="password"
                   inputMode="numeric"
                   value={newMpin}
-                  onChange={(e) => setNewMpin(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                  onChange={(e) =>
+                    setNewMpin(e.target.value.replace(/\D/g, "").slice(0, 4))
+                  }
                   placeholder="Enter 4-digit MPIN"
                   className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white text-center placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
                   maxLength={4}
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-white mb-2">Confirm MPIN</label>
+                <label className="block text-sm font-semibold text-white mb-2">
+                  Confirm MPIN
+                </label>
                 <input
                   type="password"
                   inputMode="numeric"
                   value={confirmMpin}
-                  onChange={(e) => setConfirmMpin(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                  onChange={(e) =>
+                    setConfirmMpin(
+                      e.target.value.replace(/\D/g, "").slice(0, 4)
+                    )
+                  }
                   onKeyDown={(e) =>
-                    e.key === "Enter" && newMpin.length === 4 && confirmMpin.length === 4 && handleSetMpin()
+                    e.key === "Enter" &&
+                    newMpin.length === 4 &&
+                    confirmMpin.length === 4 &&
+                    handleSetMpin()
                   }
                   placeholder="Re-enter 4-digit MPIN"
                   className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white text-center placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
@@ -419,7 +469,9 @@ const DemoLogin = () => {
               )}
               <button
                 onClick={handleSetMpin}
-                disabled={loading || newMpin.length !== 4 || confirmMpin.length !== 4}
+                disabled={
+                  loading || newMpin.length !== 4 || confirmMpin.length !== 4
+                }
                 className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-xl font-bold hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg hover:shadow-purple-500/50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {loading ? (
@@ -442,12 +494,22 @@ const DemoLogin = () => {
         {step === 6 && (
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl px-6 py-14 shadow-2xl border border-white/20 flex flex-col items-center justify-center">
             <div className="bg-gradient-to-br from-green-400 to-emerald-500 w-24 h-24 rounded-full mb-6 flex items-center justify-center shadow-lg animate-bounce">
-              <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              <svg
+                className="w-12 h-12 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={3}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             </div>
             <h1 className="text-3xl font-black text-white mb-2">Success!</h1>
-            
+
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
           </div>
         )}

@@ -14,7 +14,7 @@ const DemoSettings = () => {
 
   const handleLogout = () => {
     clearCustomerAuth();
-    localStorage.removeItem("customerAuth");
+    localStorage.removeItem("jhiejwfiuewyfwuakhfw");
     sessionStorage.clear();
     navigate("/");
   };
