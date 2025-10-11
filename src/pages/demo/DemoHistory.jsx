@@ -12,6 +12,7 @@ import {
   GiftIcon,
   ArrowLeftIcon,
 } from "@heroicons/react/24/outline";
+import { useAuthUser } from "../../hooks/useAuthUser";
 
 const PAGE_SIZE = 20;
 
@@ -92,13 +93,11 @@ const DemoHistory = () => {
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState(null);
   const [page, setPage] = useState(1);
-
   const navigate = useNavigate();
-  const { customerID, apiKey, isAuthenticated } = useCustomerAuth();
-
+  const { customerId, apiKey } = useAuthUser();
   const fetchTransactionHistory = useCallback(
     async (pageToLoad = 1) => {
-      if (!isAuthenticated || !customerID || !apiKey) {
+      if (!customerId || !apiKey) {
         setError("Customer ID and API Key are required");
         setInitialLoading(false);
         return;
@@ -114,7 +113,7 @@ const DemoHistory = () => {
           pageToLoad,
           PAGE_SIZE
         );
-        
+
         if (response.status === 200 && response.data) {
           setPagination(response.data.pagination);
           if (pageToLoad === 1) {
@@ -140,16 +139,16 @@ const DemoHistory = () => {
         setIsLoadingMore(false);
       }
     },
-    [customerID, apiKey, isAuthenticated]
+    [customerId, apiKey]
   );
 
   useEffect(() => {
-    if (customerID && apiKey && isAuthenticated) {
+    if (customerId && apiKey) {
       setPage(1);
       setError(null);
       fetchTransactionHistory(1);
     }
-  }, [customerID, apiKey, isAuthenticated]);
+  }, [customerId, apiKey]);
 
   useEffect(() => {
     if (page === 1) return;
@@ -193,27 +192,6 @@ const DemoHistory = () => {
       </p>
     </div>
   );
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-6">
-        <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl max-w-md mx-auto overflow-hidden p-6 text-center">
-          <div className="text-red-400 text-lg font-semibold mb-2">
-            Authentication Required
-          </div>
-          <p className="text-purple-200 text-sm mb-4">
-            Please access this page with valid customer credentials.
-          </p>
-          <div className="bg-white/5 rounded-lg p-3 text-xs text-purple-300">
-            <p className="font-medium mb-1">Required URL format:</p>
-            <p className="font-mono text-xs break-all">
-              ?customerID=YOUR_ID&apiKey=YOUR_KEY
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (error) {
     return (

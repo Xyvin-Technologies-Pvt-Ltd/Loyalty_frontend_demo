@@ -22,7 +22,7 @@ function getAuth() {
 }
 
 const sdkApi = {
-  // ✅ Get customer details
+
   getCustomerDetails: async () => {
     const { customerId, apiKey } = getAuth();
     try {
@@ -38,7 +38,6 @@ const sdkApi = {
     }
   },
 
-  // ✅ Get transaction history
   getTransactionHistory: async (page = 1, limit = 20) => {
     const { customerId, apiKey } = getAuth();
     try {
@@ -57,7 +56,6 @@ const sdkApi = {
     }
   },
 
-  // ✅ Add points
   addPoints: async (transactionData) => {
     const { customerId, apiKey } = getAuth();
     try {
@@ -73,7 +71,6 @@ const sdkApi = {
     }
   },
 
-  // ✅ Redeem points
   redeemPoints: async (redemptionData) => {
     const { customerId, apiKey } = getAuth();
     try {
@@ -88,8 +85,20 @@ const sdkApi = {
       throw error;
     }
   },
-
-  // ✅ Get merchant offers
+  updateCustomer: async (redemptionData) => {
+    const { customerId, apiKey } = getAuth();
+    try {
+      const response = await sdkApiClient.put(
+        "/khedmah-sdk/customer",
+        { customer_id: customerId, ...redemptionData },
+        { headers: { "x-api-key": apiKey } }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error redeeming points:", error);
+      throw error;
+    }
+  },
   getMerchantOffers: async (params = {}) => {
     const { customerId, apiKey } = getAuth();
     try {
@@ -110,7 +119,6 @@ const sdkApi = {
     }
   },
 
-  // ✅ Get brands
   getBrands: async (params = {}) => {
     const { customerId, apiKey } = getAuth();
     try {
@@ -189,7 +197,7 @@ const sdkApi = {
     try {
       const response = await sdkApiClient.post(
         "/khedmah-sdk/customer-login",
-        data, // ✅ backend expects flat body { phone, mpin? }
+        data,
         {
           headers: { "x-api-key": apiKey },
         }

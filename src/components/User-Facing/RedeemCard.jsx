@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import sdkApi from "../../api/sdk";
-import { AppMainButton } from "../../ui/AppMainButton";
 import { XMarkIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
 const RedeemCard = ({ onClose, image }) => {
   const [code, setCode] = useState(["", "", "", ""]);
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
-  const { customerID, apiKey } = useCustomerAuth();
   const [showPopup, setShowPopup] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const couponId = searchParams.get("couponId");
@@ -39,7 +36,7 @@ const RedeemCard = ({ onClose, image }) => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      const res = await sdkApi.addRedeem(customerID, apiKey, {
+      const res = await sdkApi.addRedeem({
         pin: code.join(""),
         couponId: couponId,
       });
@@ -79,7 +76,7 @@ const RedeemCard = ({ onClose, image }) => {
         </h3>
         <div className="grid grid-cols-4 gap-3 px-4 py-4">
           {code.map((digit, index) => (
-           <input
+            <input
               key={index}
               id={`code-${index}`}
               type="text"
@@ -93,7 +90,7 @@ const RedeemCard = ({ onClose, image }) => {
             />
           ))}
         </div>
-       <button
+        <button
           onClick={handleSubmit}
           disabled={loading}
           className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-purple-500/30 transition-all duration-300 hover:shadow-purple-500/50 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
@@ -101,9 +98,7 @@ const RedeemCard = ({ onClose, image }) => {
           {loading ? (
             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
           ) : (
-            <>
-              Redeem Coupon
-            </>
+            <>Redeem Coupon</>
           )}
         </button>
       </div>
@@ -151,8 +146,8 @@ const RedeemCard = ({ onClose, image }) => {
                   <br />
                   <br />
                   Thanks for being part of{" "}
-                  <span className="font-bold text-green-600">CBS</span> –
-                  keep using our services regularly to unlock even more awesome
+                  <span className="font-bold text-green-600">CBS</span> – keep
+                  using our services regularly to unlock even more awesome
                   offers!
                 </p>
               </>

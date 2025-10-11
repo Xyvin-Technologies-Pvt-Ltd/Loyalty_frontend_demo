@@ -2,7 +2,6 @@ import { ArrowLeftIcon, ClockIcon, MapPinIcon, GiftIcon, SparklesIcon } from "@h
 import { useNavigate, useSearchParams } from "react-router-dom";
 import RedeemCard from "../../components/User-Facing/RedeemCard";
 import { useEffect, useState } from "react";
-import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import sdkApi from "../../api/sdk";
 import moment from "moment";
 

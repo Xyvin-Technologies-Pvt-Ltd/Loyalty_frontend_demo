@@ -16,23 +16,15 @@ import {
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import PropTypes from "prop-types";
+import { useAuthUser } from "../../hooks/useAuthUser";
 
 const DemoLayout = ({ children, currentPage = "home" }) => {
   const [activePage, setActivePage] = useState(currentPage);
-  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { isAuthenticated, customerID, apiKey, name, customerData, apiStatus } =
-    useCustomerAuth();
-
-  useEffect(() => {
-    if (customerData !== null && customerData !== undefined) {
-      setLoading(false);
-    } else if (!isAuthenticated) {
-      setLoading(false);
-    }
-  }, [customerData, isAuthenticated]);
+  const { name } = useCustomerAuth();
+  const { apiKey, customerId } = useAuthUser();
 
   useEffect(() => {
     const path = location.pathname;
@@ -82,13 +74,11 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
   ];
 
   const handleNavigation = (item) => {
-    if (!isAuthenticated) return;
-
     setActivePage(item.id);
 
     const searchParams = new URLSearchParams();
-    if (customerID && apiKey) {
-      searchParams.set("customerID", customerID);
+    if (customerId && apiKey) {
+      searchParams.set("customerID", customerId);
       searchParams.set("apiKey", apiKey);
     }
     if (name) searchParams.set("name", name);
@@ -98,45 +88,6 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
       : item.href;
     navigate(url);
   };
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0b051f] text-white">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-fuchsia-400 mb-4">
-            Authentication Required
-          </h1>
-          <p className="text-gray-300 mb-6">
-            Please provide customerID and apiKey parameters to access the dashboard.
-          </p>
-          <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
-            <p className="text-sm text-gray-300 mb-2">Example URL:</p>
-            <code className="text-fuchsia-300 text-xs break-all">
-              /bank/dashboard?customerID=your_customer_id&apiKey=your_api_key
-            </code>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (apiStatus === 404) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0b051f] text-white">
-        <h1 className="text-2xl font-semibold text-fuchsia-400">
-          404 – Customer Not Found
-        </h1>
-      </div>
-    );
-  }
-
-  if (loading && isAuthenticated && customerData === null) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0b051f]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-fuchsia-500"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1c0632] via-[#25084a] to-[#100223] poppins-text text-white">
