@@ -12,8 +12,10 @@ const sdkApiClient = axios.create({
 });
 
 function getAuth() {
-  const { customerId, apiKey } = useAuthUser.getState();
-  if (!customerId || !apiKey) {
+  const { customerId } = useAuthUser.getState();
+  const apiKey = "H0RIRxapB4Uo7im";
+  if (!apiKey) {
+    console.error("Missing customer credentials in store");
     throw new Error("Missing customer credentials in store");
   }
   return { customerId, apiKey };
@@ -183,7 +185,7 @@ const sdkApi = {
 
   customerLogin: async (data) => {
     const { customerId, apiKey } = getAuth();
-console.log(data,"data");
+    console.log(data, "data");
     try {
       const response = await sdkApiClient.post(
         "/khedmah-sdk/customer-login",
@@ -194,7 +196,10 @@ console.log(data,"data");
       );
       return response.data;
     } catch (error) {
-      console.error("❌ Error in customer login:", error.response?.data || error.message);
+      console.error(
+        "❌ Error in customer login:",
+        error.response?.data || error.message
+      );
       throw error.response?.data || error;
     }
   },
@@ -205,7 +210,7 @@ console.log(data,"data");
    * Payload: { phone, otp }
    */
   otpVerification: async (data) => {
-      const { customerId, apiKey } = getAuth();
+    const { customerId, apiKey } = getAuth();
     try {
       const response = await sdkApiClient.post(
         "/khedmah-sdk/otp-verification",
@@ -216,7 +221,10 @@ console.log(data,"data");
       );
       return response.data;
     } catch (error) {
-      console.error("❌ Error verifying OTP:", error.response?.data || error.message);
+      console.error(
+        "❌ Error verifying OTP:",
+        error.response?.data || error.message
+      );
       throw error.response?.data || error;
     }
   },
@@ -227,18 +235,17 @@ console.log(data,"data");
    * Payload: { phone, mpin }
    */
   addMpin: async (data) => {
-      const { customerId, apiKey } = getAuth();
+    const { customerId, apiKey } = getAuth();
     try {
-      const response = await sdkApiClient.post(
-        "/khedmah-sdk/add-mpin",
-        data,
-        {
-          headers: { "x-api-key": apiKey },
-        }
-      );
+      const response = await sdkApiClient.post("/khedmah-sdk/add-mpin", data, {
+        headers: { "x-api-key": apiKey },
+      });
       return response.data;
     } catch (error) {
-      console.error("❌ Error adding MPIN:", error.response?.data || error.message);
+      console.error(
+        "❌ Error adding MPIN:",
+        error.response?.data || error.message
+      );
       throw error.response?.data || error;
     }
   },
