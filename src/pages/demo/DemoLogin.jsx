@@ -10,6 +10,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "../../hooks/useAuthUser";
 import sdkApi from "../../api/sdk";
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 const DemoLogin = () => {
   const navigate = useNavigate();
@@ -30,6 +32,7 @@ const DemoLogin = () => {
       navigate("/bank/dashboard");
     }
   }, [navigate]);
+
   const sendOtp = async (phone) => {
     try {
       setLoading(true);
@@ -197,17 +200,77 @@ const DemoLogin = () => {
                 <label className="block text-sm font-semibold text-white mb-2">
                   Phone Number
                 </label>
-                <div className="relative">
-                  <PhoneIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-purple-300" />
-                  <input
-                    type="tel"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handlePhoneSubmit()}
-                    placeholder="Enter your phone number"
-                    className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all"
-                  />
-                </div>
+              <style>{`
+                  .PhoneInput {
+                    background: rgba(255, 255, 255, 0.05);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 0.75rem;
+                    padding: 0.75rem 1rem;
+                    transition: all 0.3s;
+                  }
+                  .PhoneInput:focus-within {
+                    outline: none;
+                    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.4);
+                    border-color: transparent;
+                  }
+                  .PhoneInputInput {
+                    background: transparent;
+                    border: none;
+                    color: white;
+                    font-size: 1rem;
+                    outline: none;
+                    flex: 1;
+                  }
+                  .PhoneInputInput::placeholder {
+                    color: rgba(216, 180, 254, 0.6);
+                  }
+                  .PhoneInputCountrySelect {
+                    background: #1e293b;
+                    border: none;
+                    color: white;
+                    cursor: pointer;
+                    margin-right: 0.5rem;
+                    padding: 0.25rem;
+                    border-radius: 0.5rem;
+                    outline: none;
+                  }
+                  .PhoneInputCountrySelect option {
+                    background: #1e293b;
+                    color: white;
+                    padding: 0.5rem;
+                  }
+                  .PhoneInputCountrySelect:hover {
+                    background: #334155;
+                  }
+                  .PhoneInputCountrySelectArrow {
+                    border-color: white transparent transparent;
+                    opacity: 0.6;
+                  }
+                  .PhoneInputCountryIcon {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    margin-right: 0.5rem;
+                    border: none;
+                    outline: none;
+                    box-shadow: none;
+                  }
+                  .PhoneInputCountryIconImg {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    outline: none;
+                    box-shadow: none;
+                    display: block;
+                  }
+                `}</style>
+                <PhoneInput
+                  international
+                  defaultCountry="IN"
+                  value={phoneNumber}
+                  onChange={setPhoneNumber}
+                  placeholder="Enter phone number"
+                  className="phone-input-custom"
+                />
               </div>
               {error && (
                 <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-3 text-red-200 text-sm">
@@ -493,6 +556,8 @@ const DemoLogin = () => {
             </div>
           </div>
         )}
+
+        {/* Step 6: Success */}
         {step === 6 && (
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl px-6 py-14 shadow-2xl border border-white/20 flex flex-col items-center justify-center">
             <div className="bg-gradient-to-br from-green-400 to-emerald-500 w-24 h-24 rounded-full mb-6 flex items-center justify-center shadow-lg animate-bounce">
@@ -511,7 +576,6 @@ const DemoLogin = () => {
               </svg>
             </div>
             <h1 className="text-3xl font-black text-white mb-2">Success!</h1>
-
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
           </div>
         )}
