@@ -17,6 +17,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import PropTypes from "prop-types";
 import { useAuthUser } from "../../hooks/useAuthUser";
+import BackButtonHandler from "../../components/BackButtonHandler";
 
 const DemoLayout = ({ children, currentPage = "home" }) => {
   const [activePage, setActivePage] = useState(currentPage);
@@ -91,6 +92,7 @@ const DemoLayout = ({ children, currentPage = "home" }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1c0632] via-[#25084a] to-[#100223] poppins-text text-white">
+      <BackButtonHandler />
       <main className="pb-28 relative z-10">{children}</main>
 
       {/* Floating Frosted Nav Bar */}

@@ -28,7 +28,7 @@ const BackButtonHandler = () => {
         // Check if we can go back in the browser history
         if (window.history.length > 1) {
           // Define root routes that should exit the app
-          const rootRoutes = ['/', '/demo', '/auth-demo'];
+          const rootRoutes = ['/', '/demo', '/auth-demo','/bank/dashboard'];
           const isOnRootRoute = rootRoutes.includes(location.pathname);
           
           // Check if we're on a protected route (admin dashboard)
