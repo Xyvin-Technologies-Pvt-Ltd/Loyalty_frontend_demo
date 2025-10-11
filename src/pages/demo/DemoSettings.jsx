@@ -11,7 +11,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "../../hooks/useAuthUser";
-import { set } from "react-hook-form";
 import sdkApi from "../../api/sdk";
 
 const DemoSettings = () => {
@@ -35,12 +34,9 @@ const DemoSettings = () => {
     fetchData();
   }, []);
 
-  console.log(customer._id, "customer");
-
   const handleEditToggle = async () => {
     if (isEditing) {
       try {
-      
         await sdkApi.updateCustomer({
           customer_id: editedCustomer._id,
           name: editedCustomer.name,
@@ -144,7 +140,7 @@ const DemoSettings = () => {
                   />
                 ) : (
                   <p className="text-white font-bold truncate">
-                    {customer?.name || "Nill"}
+                    {customer?.name || "Nil"}
                   </p>
                 )}
               </div>
@@ -168,7 +164,7 @@ const DemoSettings = () => {
                   />
                 ) : (
                   <p className="text-white font-bold truncate">
-                    {customer?.email || "Nill"}
+                    {customer?.email || "Nil"}
                   </p>
                 )}
               </div>
@@ -184,7 +180,7 @@ const DemoSettings = () => {
                   Phone Number
                 </p>
                 <p className="text-white font-bold truncate">
-                  {customer?.mobile || "Nill"}
+                  {customer?.mobile || "Nil"}
                 </p>
                 {isEditing && (
                   <p className="text-xs text-purple-400 mt-1">
