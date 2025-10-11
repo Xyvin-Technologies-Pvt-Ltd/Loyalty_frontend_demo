@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useAuthUser } from "../hooks/useAuthUser";
 
-// const sdkUrl = "http://13.127.95.200/api/v1";
-const sdkUrl = "http://localhost:3002/api/v1";
+const sdkUrl = "http://13.127.95.200/api/v1";
+// const sdkUrl = "http://localhost:3002/api/v1";
 
 const sdkApiClient = axios.create({
   baseURL: sdkUrl,
