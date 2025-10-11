@@ -40,8 +40,13 @@ const DemoSettings = () => {
   const handleEditToggle = async () => {
     if (isEditing) {
       try {
-        // Save changes
-        await sdkApi.updateCustomer( editedCustomer);
+      
+        await sdkApi.updateCustomer({
+          customer_id: editedCustomer._id,
+          name: editedCustomer.name,
+          email: editedCustomer.email,
+          mobile: editedCustomer.mobile,
+        });
         setCustomer(editedCustomer);
         setIsEditing(false);
       } catch (err) {
@@ -139,7 +144,7 @@ const DemoSettings = () => {
                   />
                 ) : (
                   <p className="text-white font-bold truncate">
-                    {customer?.name || "Loading..."}
+                    {customer?.name || "Nill"}
                   </p>
                 )}
               </div>
@@ -163,7 +168,7 @@ const DemoSettings = () => {
                   />
                 ) : (
                   <p className="text-white font-bold truncate">
-                    {customer?.email || "Loading..."}
+                    {customer?.email || "Nill"}
                   </p>
                 )}
               </div>
@@ -179,7 +184,7 @@ const DemoSettings = () => {
                   Phone Number
                 </p>
                 <p className="text-white font-bold truncate">
-                  {customer?.mobile || "Loading..."}
+                  {customer?.mobile || "Nill"}
                 </p>
                 {isEditing && (
                   <p className="text-xs text-purple-400 mt-1">

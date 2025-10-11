@@ -275,26 +275,7 @@ const PremiumOfferCard = ({ data, index, navigateWithParams }) => {
           {description?.en}
         </p>
 
-        <div className="flex items-center justify-between">
-          {daysLeft && (
-            <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-xl px-2 py-0.5 rounded-full border border-white/20">
-              <svg
-                className="w-3 h-3 text-emerald-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="text-white text-[10px] font-bold">
-                {daysLeft}d
-              </span>
-            </div>
-          )}
-
+        <div className="flex items-end justify-end">
           <button className="bg-white text-purple-700 px-3 py-1 rounded-full text-[10px] font-black hover:bg-purple-50 transition-all shadow-lg hover:scale-105">
             Claim
           </button>
