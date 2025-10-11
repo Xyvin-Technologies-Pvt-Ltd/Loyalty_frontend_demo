@@ -63,8 +63,11 @@ import DemoHowtoGet from "../pages/demo/DemoHowToGer";
 import DemoLogin from "../pages/demo/DemoLogin";
 import DemoSettings from "../pages/demo/DemoSettings";
 import BankProtectedLayout from "./ProtectedLayout";
+import BackButtonHandler from "../components/BackButtonHandler";
+
 const RootLayout = () => (
   <AuthProvider>
+    <BackButtonHandler />
     <Outlet />
   </AuthProvider>
 );
