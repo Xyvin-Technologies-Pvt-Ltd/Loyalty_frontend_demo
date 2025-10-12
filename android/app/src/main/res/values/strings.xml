@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Loyalty Frontend</string>
-    <string name="title_activity_main">Loyalty Frontend</string>
-    <string name="package_name">com.xyvin.loyalty</string>
-    <string name="custom_url_scheme">com.xyvin.loyalty</string>
+    <string name="app_name">Winner Rewards</string>
+    <string name="title_activity_main">Winner Rewards</string>
+    <string name="package_name">com.xyvin.winner_rewards</string>
+    <string name="custom_url_scheme">com.xyvin.winner_rewards</string>
 </resources>
