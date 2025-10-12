@@ -43,7 +43,8 @@ const DemoLogin = () => {
         return { success: true };
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to send OTP");
+      console.log('err', err);
+      setError(err.message || "Failed to send OTP");
       return { success: false };
     } finally {
       setLoading(false);
@@ -323,6 +324,11 @@ const DemoLogin = () => {
               >
                 ← Back
               </button>
+              {error && (
+                <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-3 text-red-200 text-sm">
+                  {error}
+                </div>
+              )}
             </div>
           </div>
         )}
