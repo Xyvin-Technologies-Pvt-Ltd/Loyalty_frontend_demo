@@ -47,10 +47,8 @@ const DemoBrands = () => {
   };
 
   useEffect(() => {
-    if (customerID && apiKey) {
-      fetchData(true);
-    }
-  }, [customerID, apiKey, searchTerm]);
+    fetchData(true);
+  }, [searchTerm]);
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
