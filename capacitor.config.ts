@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.xyvin.loyalty',
-  appName: 'Loyalty Frontend',
+  appId: 'com.xyvin.winner_rewards',
+  appName: 'Winner Rewards',
   webDir: 'dist',
   bundledWebRuntime: false,
   ios: {
