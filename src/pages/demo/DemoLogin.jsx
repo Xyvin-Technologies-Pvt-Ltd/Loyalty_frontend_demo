@@ -266,7 +266,7 @@ const DemoLogin = () => {
                 `}</style>
                 <PhoneInput
                   international
-                  defaultCountry="IN"
+                  defaultCountry="OM"
                   value={phoneNumber}
                   onChange={setPhoneNumber}
                   placeholder="Enter phone number"
