@@ -72,6 +72,12 @@ const DemoCategories = () => {
       </p>
     </div>
   );
+  const filteredCategories = categories?.filter(
+    (category) =>
+      !["6880c1ec15086f43fc3adf76", "6880c20615086f43fc3adf82","688896cc423cb682aa18d8da"].includes(
+        category._id
+      )
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 poppins-text">
@@ -107,10 +113,10 @@ const DemoCategories = () => {
           <LoadingSpinner />
         ) : (
           <div className="grid grid-cols-2 gap-4 mt-4">
-            {categories?.length === 0 ? (
+            {filteredCategories?.length === 0 ? (
               <NoCategoriesFound />
             ) : (
-              categories?.map((category, index) => (
+              filteredCategories?.map((category, index) => (
                 <ProductCard
                   key={index}
                   product={category}

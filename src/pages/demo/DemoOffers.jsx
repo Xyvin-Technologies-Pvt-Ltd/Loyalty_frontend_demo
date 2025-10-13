@@ -5,7 +5,6 @@ import {
 
 import { useEffect, useState, useCallback } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import sdkApi from "../../api/sdk";
 import OfferView from "../../components/User-Facing/OfferView";
 
@@ -83,7 +82,7 @@ const DemoOffers = () => {
 
   useEffect(() => {
     fetchOfferData(true);
-  }, [ activeCategory, searchQuery]);
+  }, [activeCategory, searchQuery]);
 
   const handleSearchChange = useCallback(
     (value) => {
@@ -99,6 +98,14 @@ const DemoOffers = () => {
       if (searchTimeout) clearTimeout(searchTimeout);
     };
   }, [searchTimeout]);
+  const filteredCategories = categories?.filter(
+    (category) =>
+      ![
+        "6880c1ec15086f43fc3adf76",
+        "6880c20615086f43fc3adf82",
+        "688896cc423cb682aa18d8da",
+      ].includes(category._id)
+  );
 
   const LoadingSpinner = () => (
     <div className="flex justify-center items-center py-8">
@@ -140,7 +147,7 @@ const DemoOffers = () => {
       {/* Category Filter */}
       <div className="px-4 mb-4 mt-3">
         <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2">
-          {categories?.map((category) => (
+          {filteredCategories?.map((category) => (
             <button
               key={category?._id}
               onClick={() => setActiveCategory(category?._id)}

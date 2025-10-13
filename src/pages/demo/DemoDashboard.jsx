@@ -24,13 +24,14 @@ const DemoDashboard = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
+  console.log("categories", categories);
   useEffect(() => {
     const fetchCustomerData = async () => {
       try {
         const [offers, brandData, categoriesData, user] = await Promise.all([
-          sdkApi.getMerchantOffers({ limit: 20 }),
+          sdkApi.getMerchantOffers({ limit: 10 }),
           sdkApi.getBrands({ limit: 20 }),
-          sdkApi.getCategories({ limit: 20 }),
+          sdkApi.getCategories({ limit: 10 }),
           sdkApi.getCustomerDetails(),
         ]);
 
@@ -187,18 +188,27 @@ const DemoDashboard = () => {
                   <SkeletonBox className="w-12 h-3 rounded-md" />
                 </div>
               ))
-            : categories.slice(0, 8).map((category, idx) => (
-                <CategoryCard
-                  key={category._id}
-                  category={category}
-                  index={idx}
-                  onClick={() =>
-                    navigateWithParams("/bank/offers", {
-                      category: category._id,
-                    })
-                  }
-                />
-              ))}
+            : categories
+                .filter(
+                  (category) =>
+                    ![
+                      "6880c1ec15086f43fc3adf76",
+                      "6880c20615086f43fc3adf82",
+                    ].includes(String(category._id))
+                )
+                .slice(0, 8)
+                .map((category, idx) => (
+                  <CategoryCard
+                    key={category._id}
+                    category={category}
+                    index={idx}
+                    onClick={() =>
+                      navigateWithParams("/bank/offers", {
+                        category: category._id,
+                      })
+                    }
+                  />
+                ))}
         </div>
       </div>
     </div>
