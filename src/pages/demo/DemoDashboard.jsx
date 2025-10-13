@@ -23,11 +23,11 @@ const DemoDashboard = () => {
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-const[user,setUser]=useState({})
+  const [user, setUser] = useState({});
   useEffect(() => {
     const fetchCustomerData = async () => {
       try {
-        const [offers, brandData, categoriesData,user] = await Promise.all([
+        const [offers, brandData, categoriesData, user] = await Promise.all([
           sdkApi.getMerchantOffers({ limit: 20 }),
           sdkApi.getBrands({ limit: 20 }),
           sdkApi.getCategories({ limit: 20 }),
@@ -37,7 +37,7 @@ const[user,setUser]=useState({})
         setOfferData(offers.data || []);
         setBrands(brandData.data || []);
         setCategories(categoriesData.data || []);
-        setUser(user)
+        setUser(user);
       } catch (error) {
         console.error("Failed to fetch customer data:", error);
       } finally {
@@ -69,7 +69,7 @@ const[user,setUser]=useState({})
             Welcome back,
           </h2>
           <h1 className="text-2xl font-black capitalize text-white drop-shadow-lg mt-1">
-            { user?.data?.name ||user?.data?.mobile}
+            {user?.data?.name || user?.data?.mobile}
           </h1>
           <div className="mt-3 w-20 h-1 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-pulse"></div>
         </div>
@@ -89,7 +89,7 @@ const[user,setUser]=useState({})
       </div>
 
       <div className="relative px-6">
-        <div className="grid grid-cols-4 gap-3 mb-8">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
           {[
             {
               icon: GiftIcon,
@@ -109,24 +109,18 @@ const[user,setUser]=useState({})
               gradient: "from-emerald-500 via-teal-500 to-emerald-600",
               route: "/bank/categories",
             },
-            {
-              icon: HeartIcon,
-              label: "Favorites",
-              gradient: "from-orange-500 via-amber-500 to-orange-600",
-              route: "/bank/offers",
-            },
           ].map((action, idx) => (
             <button
               key={idx}
               onClick={() => navigateWithParams(action.route)}
-              className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-all active:scale-95 border border-white/10 hover:border-white/20"
+              className="group bg-white/10 backdrop-blur-xl rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-all active:scale-95 border border-white/10 hover:border-white/20 text-center"
             >
               <div
-                className={`w-11 h-11 bg-gradient-to-br ${action.gradient} rounded-xl flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform shadow-lg`}
+                className={`w-12 h-12 mx-auto bg-gradient-to-br ${action.gradient} rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg`}
               >
-                <action.icon className="w-5 h-5 text-white" />
+                <action.icon className="w-6 h-6 text-white" />
               </div>
-              <p className="text-xs font-bold text-white">{action.label}</p>
+              <p className="text-sm font-semibold text-white">{action.label}</p>
             </button>
           ))}
         </div>
