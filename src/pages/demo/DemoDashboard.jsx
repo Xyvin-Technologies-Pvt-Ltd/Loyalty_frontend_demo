@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { GiftIcon, TagIcon, Squares2X2Icon } from "@heroicons/react/24/solid";
 import {
   ChevronRightIcon,
@@ -6,7 +6,6 @@ import {
   HeartIcon,
 } from "@heroicons/react/24/outline";
 import sdkApi from "../../api/sdk";
-import { useCustomerAuth } from "../../hooks/useCustomerAuth";
 import { useNavigationWithParams } from "../../utils/navigationUtils";
 import { getImageUrl, handleImageError } from "../../utils/imageUtils";
 import logo from "../../assets/WhatsApp Image 2025-10-05 at 14.08.37_008691b7.jpg";
@@ -20,24 +19,25 @@ const SkeletonBox = ({ className }) => (
 
 const DemoDashboard = () => {
   const { navigateWithParams } = useNavigationWithParams();
-  const { customerData } = useCustomerAuth();
   const [offerData, setOfferData] = useState([]);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-
+const[user,setUser]=useState({})
   useEffect(() => {
     const fetchCustomerData = async () => {
       try {
-        const [offers, brandData, categoriesData] = await Promise.all([
+        const [offers, brandData, categoriesData,user] = await Promise.all([
           sdkApi.getMerchantOffers({ limit: 20 }),
           sdkApi.getBrands({ limit: 20 }),
           sdkApi.getCategories({ limit: 20 }),
+          sdkApi.getCustomerDetails(),
         ]);
 
         setOfferData(offers.data || []);
         setBrands(brandData.data || []);
         setCategories(categoriesData.data || []);
+        setUser(user)
       } catch (error) {
         console.error("Failed to fetch customer data:", error);
       } finally {
@@ -47,7 +47,6 @@ const DemoDashboard = () => {
 
     fetchCustomerData();
   }, []);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 pb-6 relative overflow-hidden">
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
@@ -69,8 +68,8 @@ const DemoDashboard = () => {
           <h2 className="text-sm text-purple-200 font-medium tracking-wide">
             Welcome back,
           </h2>
-          <h1 className="text-2xl font-black text-white drop-shadow-lg mt-1">
-            {customerData?.name || "Guest"}
+          <h1 className="text-2xl font-black capitalize text-white drop-shadow-lg mt-1">
+            { user?.data?.name ||user?.data?.mobile}
           </h1>
           <div className="mt-3 w-20 h-1 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-pulse"></div>
         </div>
