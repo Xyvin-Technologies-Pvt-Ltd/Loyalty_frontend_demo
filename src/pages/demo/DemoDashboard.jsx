@@ -8,7 +8,7 @@ import {
 import sdkApi from "../../api/sdk";
 import { useNavigationWithParams } from "../../utils/navigationUtils";
 import { getImageUrl, handleImageError } from "../../utils/imageUtils";
-import logo from "../../assets/WhatsApp Image 2025-10-05 at 14.08.37_008691b7.jpg";
+import logo from "../../assets/Winfinity Rewards Logo in White BG.jpg";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const SkeletonBox = ({ className }) => (
