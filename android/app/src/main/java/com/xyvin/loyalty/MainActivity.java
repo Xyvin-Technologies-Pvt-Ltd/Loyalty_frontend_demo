@@ -1,4 +1,4 @@
-package com.xyvin.loyalty;
+package com.continuityoman.winnerloyalty;
 
 import com.getcapacitor.BridgeActivity;
 

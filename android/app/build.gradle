@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.xyvin.loyalty"
+    namespace "com.continuityoman.winnerloyalty"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.xyvin.loyalty"
+        applicationId "com.continuityoman.winnerloyalty"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
