@@ -15,6 +15,8 @@ import sdkApi from "../../api/sdk";
 
 const DemoSettings = () => {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
   const [customer, setCustomer] = useState({});
@@ -210,6 +212,14 @@ const DemoSettings = () => {
           <ArrowRightOnRectangleIcon className="w-6 h-6" />
           Logout
         </button>
+        {/* Delete Account Button */}
+        <button
+          onClick={() => setShowDeleteConfirm(true)}
+          className="w-full bg-gradient-to-r from-gray-700 to-gray-900 text-white py-4 rounded-2xl font-black text-lg shadow-xl hover:shadow-2xl hover:shadow-gray-700/50 transition-all active:scale-95 flex items-center justify-center gap-3"
+        >
+          <XMarkIcon className="w-6 h-6" />
+          Delete Account
+        </button>
       </div>
 
       {/* Logout Confirmation Modal */}
@@ -246,6 +256,50 @@ const DemoSettings = () => {
               </button>
               <button
                 onClick={() => setShowLogoutConfirm(false)}
+                className="w-full bg-white/5 border border-white/20 text-white py-3 rounded-xl font-bold hover:bg-white/10 transition-all active:scale-95"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Delete Account Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4">
+          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/20 max-w-sm w-full shadow-2xl relative">
+            <button
+              onClick={() => setShowDeleteConfirm(false)}
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all"
+            >
+              <XMarkIcon className="w-5 h-5 text-white" />
+            </button>
+
+            <div className="mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-gray-700 to-gray-900 animate-pulse mb-6" />
+
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+              <XMarkIcon className="w-8 h-8 text-white" />
+            </div>
+
+            <h2 className="text-2xl font-black text-white mb-3 text-center">
+              Delete Account?
+            </h2>
+
+            <p className="text-purple-200 text-sm text-center mb-8">
+              Are you sure you want to delete your account? You will be logged
+              out automatically.
+            </p>
+
+            <div className="space-y-3">
+              <button
+                onClick={handleLogout} // same logout function
+                className="w-full bg-gradient-to-r from-gray-700 to-gray-900 text-white py-3 rounded-xl font-bold hover:from-gray-800 hover:to-black transition-all shadow-lg hover:shadow-gray-800/50 active:scale-95"
+              >
+                Yes, Delete Account
+              </button>
+
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
                 className="w-full bg-white/5 border border-white/20 text-white py-3 rounded-xl font-bold hover:bg-white/10 transition-all active:scale-95"
               >
                 Cancel
